@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_155422) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_090733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "classes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classes_users", id: false, force: :cascade do |t|
+    t.bigint "class_id", null: false
+    t.bigint "user_id", null: false
+    t.float "gpa"
+    t.index ["class_id", "user_id"], name: "index_classes_users_on_class_id_and_user_id", unique: true
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -21,15 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_155422) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "subject_id", null: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "class_id", null: false
+    t.index ["class_id"], name: "index_schedules_on_class_id"
+    t.index ["subject_id", "class_id"], name: "index_schedules_on_subject_id_and_class_id", unique: true
     t.index ["subject_id"], name: "index_schedules_on_subject_id"
-    t.index ["user_id", "subject_id"], name: "index_schedules_on_user_id_and_subject_id", unique: true
-    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -44,10 +57,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_155422) do
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "class_id"
+    t.index ["class_id"], name: "index_users_on_class_id"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "schedules", "classes"
   add_foreign_key "schedules", "subjects"
-  add_foreign_key "schedules", "users"
+  add_foreign_key "users", "classes"
   add_foreign_key "users", "roles"
 end
