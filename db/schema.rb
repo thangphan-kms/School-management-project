@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_090733) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_29_142537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "classes", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "classes_users", id: false, force: :cascade do |t|
-    t.bigint "class_id", null: false
+  create_table "courses_users", id: false, force: :cascade do |t|
+    t.bigint "course_id", null: false
     t.bigint "user_id", null: false
     t.float "gpa"
-    t.index ["class_id", "user_id"], name: "index_classes_users_on_class_id_and_user_id", unique: true
+    t.index ["course_id", "user_id"], name: "index_courses_users_on_course_id_and_user_id", unique: true
   end
 
   create_table "roles", force: :cascade do |t|
@@ -39,9 +39,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_090733) do
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "class_id", null: false
-    t.index ["class_id"], name: "index_schedules_on_class_id"
-    t.index ["subject_id", "class_id"], name: "index_schedules_on_subject_id_and_class_id", unique: true
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_schedules_on_course_id"
+    t.index ["subject_id", "course_id"], name: "index_schedules_on_subject_id_and_course_id", unique: true
     t.index ["subject_id"], name: "index_schedules_on_subject_id"
   end
 
@@ -57,13 +57,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_090733) do
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "class_id"
-    t.index ["class_id"], name: "index_users_on_class_id"
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
-  add_foreign_key "schedules", "classes"
+  add_foreign_key "courses_users", "courses"
+  add_foreign_key "courses_users", "users"
+  add_foreign_key "schedules", "courses"
   add_foreign_key "schedules", "subjects"
-  add_foreign_key "users", "classes"
+  add_foreign_key "users", "courses"
   add_foreign_key "users", "roles"
 end

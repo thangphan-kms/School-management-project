@@ -1,12 +1,11 @@
 # == Schema Information
 #
-# Table name: subjects
+# Table name: courses
 #
 #  id         :bigint           not null, primary key
 #  name       :string
-#  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Subject < ApplicationRecord
+class Course < ApplicationRecord
 end
