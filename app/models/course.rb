@@ -8,4 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Course < ApplicationRecord
+  has_many :courses_users
+  has_many :users, through: :courses_user
 end

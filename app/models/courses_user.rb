@@ -15,7 +15,7 @@
 #  fk_rails_...  (course_id => courses.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class CoursesUsers < ApplicationRecord
-  belongs_to :class
+class CoursesUser < ApplicationRecord
+  belongs_to :course
   belongs_to :user
 end
