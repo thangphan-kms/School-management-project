@@ -8,10 +8,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def create
-    super
-  end
-
   def register_success(resource)
     render json: {
       status: { code: 200, message: 'Signed up successfully' },
@@ -21,7 +17,8 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   def register_failed(resource)
     render json: {
-      status: { message: 'User could not be created successfull', errors: resource.errors.full_messages }
+      status: { message: 'User could not be created successfull',
+                errors: resource.errors.full_messages }
     }, status: :unprocessable_entity
   end
 end

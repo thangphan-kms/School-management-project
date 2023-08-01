@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       }
 
       get '/current_user', to: 'api/v1/current_user#index'
+      get '/roles', to: 'api/v1/role#index'
     end
   end
 end
