@@ -2,12 +2,10 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def create
     puts '----------------> create method(login) SessionsController <-----------------------'
     user_params = params[:user]
-
     if user_params.present?
       user = User.find_by(email: user_params[:email])
 
       if user&.valid_password?(user_params[:password]) && sign_in(:user, user)
-        puts "sign_in(:user, user) :>> #{sign_in(:user, user)}"
         login_success(user)
       else
         login_failed
