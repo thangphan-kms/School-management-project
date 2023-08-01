@@ -7,3 +7,9 @@
 ```bash
 EDITOR=vim rails credentials:edit
 ```
+
+### Execute the sesion for login feature
+
+```bash
+rspec spec/controllers/sessions_controller_spec.rb
+```
