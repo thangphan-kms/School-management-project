@@ -16,9 +16,6 @@ class Api::V1::SchedulesController < ActionController::API
     jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1],
                              Rails.application.credentials.devise[:jwt_secret_key]).first
     user_id = jwt_payload['sub']
-    puts "user_id :>> #{user_id}"
     user = User.find(user_id.to_s)
-
-    puts "user :>> #{user}"
   end
 end

@@ -1,6 +1,5 @@
 module ControllerMacros
   def login_user
-    puts '-------------------------> ControllerMacros login_user <-----------------------'
     before(:each) do
       # Init roles
       admin = FactoryBot.create(:role, :admin)

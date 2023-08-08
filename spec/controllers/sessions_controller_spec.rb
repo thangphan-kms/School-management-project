@@ -5,7 +5,6 @@ RSpec.describe Api::V1::Users::SessionsController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      puts "response :>> #{response}"
       expect(response).to be_successful
     end
   end

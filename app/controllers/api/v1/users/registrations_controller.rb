@@ -1,6 +1,5 @@
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   def respond_with(resource, _opts = {})
-    puts '----------------> respond_with of RegistrationsController <-----------------------'
     if resource.persisted?
       register_success(resource)
     else

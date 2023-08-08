@@ -17,8 +17,8 @@ course5 = Course.create(name: 'Swimming class')
 # student3 = User.create(name: 'Bioch', role_id: role2.id)
 
 # Student have courses
-# course_student1 = CoursesUser.create(course_id: course1.id, user_id: student1.id)
-# course_student2 = CoursesUser.create(course_id: course2.id, user_id: student1.id)
-# course_student3 = CoursesUser.create(course_id: course3.id, user_id: student1.id)
+course_student1 = CoursesUser.create(course_id: course1.id, user_id: 1)
+course_student2 = CoursesUser.create(course_id: course2.id, user_id: 1)
+course_student3 = CoursesUser.create(course_id: course3.id, user_id: 1)
 
 admin1 = User.create(name: 'Nguyen', role_id: role1.id)

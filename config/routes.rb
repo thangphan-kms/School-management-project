@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [] do
+        scope module: :users do
+          resources :courses, only: [:index, :show]
+        end
+      end
+    end
+  end
+
   scope :api do
     scope :v1 do
+
       devise_for :users, path: '', path_names: {
         sign_in: 'login',
         sign_out: 'logout',
