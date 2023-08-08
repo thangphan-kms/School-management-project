@@ -13,3 +13,18 @@ EDITOR=vim rails credentials:edit
 ```bash
 rspec spec/controllers/sessions_controller_spec.rb
 ```
+
+### Get the methods declare of a Model
+
+```bash
+rails console
+
+# <model_name>.methods
+pry> User.methods
+```
+
+### Reload rails console enviroment when you modified anything in your Rails app
+
+```
+pry> reload!
+```
