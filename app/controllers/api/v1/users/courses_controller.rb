@@ -12,6 +12,20 @@ class Api::V1::Users::CoursesController < Common::AuthController
   def show
   end
 
+  def destroy
+    course_id = params[:id]
+    user_id = current_user.id
+    @user = User.find(user_id)
+
+    @course = Course.find(course_id)
+    puts "course will be delete: #{@course}"
+
+    # Auto delete join table
+    @user.courses.delete(@course)
+
+    render json: { message: 'Deleted course' }
+  end
+
   def update
   end
 end

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [] do
         scope module: :users do
-          resources :courses, only: [:index, :show]
+          resources :courses, only: [:index, :show, :destroy]
         end
       end
 
